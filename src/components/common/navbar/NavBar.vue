@@ -17,15 +17,17 @@ export default {
     display: flex;
     height: 44px;
     line-height: 44px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(100, 100, 100, 0.2);
   }
 
   .left,.right{
     width: 60px;
-    background: red;
+   
   }
 
   .center{
     flex: 1;
-    background: green;
+   
   }
 </style>
