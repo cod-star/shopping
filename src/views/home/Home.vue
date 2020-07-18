@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import NavBar from 'components/common/navbar/NavBar'
-import HomeSwiper from './childComps/HomeSwiper'
+import NavBar from 'components/common/navbar/NavBar';
+import HomeSwiper from './childComps/HomeSwiper';
 
 
-import {getHomeMultidata} from 'network/home.js'
+import {getHomeMultidata} from 'network/home.js';
 // import Swiper from 'components/common/swiper/Swiper'
 // import SwiperItem from 'compoments/common/swiiper/SwiperItem'
 
