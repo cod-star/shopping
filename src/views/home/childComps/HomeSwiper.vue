@@ -2,7 +2,7 @@
   <swiper>
     <!-- 解决 1.在v-for 后添加 :key='item'
         <li v-for="i in list" :key="i">-->
-    <swiper-item v-for="item in banners" :key='item'>
+    <swiper-item v-for="item in banners">
       <a :href="item.link">
         <img :src="item.image" alt="">
       </a>
