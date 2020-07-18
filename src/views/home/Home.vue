@@ -4,17 +4,58 @@
     <home-swiper :banners="banners"/>
     <recommend-view :recommends="recommends"></recommend-view>
     <home-feature/>
+    <tab-cortal class="tab-cortal" :title="['流行','新款','精选']"/>
+
+    <ul>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+      <li>hhhhhhhhh</li>
+    </ul>
   </div>
 </template>
 
 <script>
-import NavBar from 'components/common/navbar/NavBar';
-import HomeSwiper from './childComps/HomeSwiper';
-import RecommendView from './childComps/RecommendView';
+import HomeSwiper from './childComps/HomeSwiper'
+import RecommendView from './childComps/RecommendView'
 import HomeFeature from './childComps/HomeFeature'
 
+import NavBar from 'components/common/navbar/NavBar'
+import TabCortal from 'components/content/tabcortal/TabCortal'
 
-import {getHomeMultidata} from 'network/home.js';
+import {getHomeMultidata} from 'network/home.js'
 // import Swiper from 'components/common/swiper/Swiper'
 // import SwiperItem from 'compoments/common/swiiper/SwiperItem'
 
@@ -22,10 +63,11 @@ import {getHomeMultidata} from 'network/home.js';
 export default {
   name:"Home",
   components: {
-    NavBar,
     HomeSwiper,
     RecommendView,
-    HomeFeature
+    HomeFeature,
+    NavBar,
+    TabCortal 
   },
   data() {
     return {
@@ -64,4 +106,8 @@ export default {
   z-index: 9;
 }
   
+  .tab-cortal{
+    position: sticky;
+    top: 44px;
+  }
 </style>
