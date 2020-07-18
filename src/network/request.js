@@ -14,17 +14,16 @@ export function request(config){
       // 某些网络请求，必须要携带一些特殊的信息
       return config
     },err => {
-      console.log(err);
+     
     })
 
     // 响应拦截
     instancel.interceptors.response.use(res => {
-      console.log(res);
+      // 拦截后需要将拦截的下来处理的结果返回
       return res.data
     },err => {
       console.log(err);
     })
-
   // 3发送真正网络请求
   return instancel(config)
 
