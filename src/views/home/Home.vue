@@ -5,6 +5,7 @@
     <recommend-view :recommends="recommends"></recommend-view>
     <home-feature/>
     <tab-cortal class="tab-cortal" :title="['流行','新款','精选']"/>
+    <goods-list :goods="goods['pop'].list"/>
 
     <ul>
       <li>hhhhhhhhh</li>
@@ -54,8 +55,9 @@ import HomeFeature from './childComps/HomeFeature'
 
 import NavBar from 'components/common/navbar/NavBar'
 import TabCortal from 'components/content/tabcortal/TabCortal'
+import GoodsList from 'components/content/goods/GoodsList'
 
-import {getHomeMultidata} from 'network/home.js'
+import {getHomeMultidata,getHomeGoods} from 'network/home.js'
 // import Swiper from 'components/common/swiper/Swiper'
 // import SwiperItem from 'compoments/common/swiiper/SwiperItem'
 
@@ -72,18 +74,48 @@ export default {
   data() {
     return {
       banners: [],
-      recommends: []
+      recommends: [],
+      goods: {
+        'pop': {page: 0, list: []},
+        'new': {page: 0, list: []},
+        'sell': {page: 0, list: []}
+      }
     }
   },
   created() {
     // 1.请求多个数据
-    getHomeMultidata().then(res => {
+    this.getHomeMultidata()
+
+    // 2.请求商品数据
+    this.getHomeGoods('pop')
+    this.getHomeGoods('new')
+    this.getHomeGoods('sell')
+   
+  },
+  methods: {
+    // 封装
+    getHomeMultidata(){
+      getHomeMultidata().then(res => {
       // this.reslut = res;
       // console.log(res);
       this.banners = res.data.banner.list
       // console.log(this.banners);
       this.recommends = res.data.recommend.list
     })
+    },
+      getHomeGoods(type){
+      const page = this.goods[type].page + 1
+      getHomeGoods(type,page).then(res => {
+        console.log(res);
+        // 老师接口已经改
+        this.goods[type].list.push(...res.data.list)
+        this.goods[type].page +=1
+     
+    })
+    }
+    
+    
+    
   },
   
 }
