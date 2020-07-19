@@ -1,11 +1,13 @@
 <template>
   <div id="home">
-    <nav-bar class="home-nav"><div slot="center">购物街</div> </nav-bar>
-    <home-swiper :banners="banners"/>
+    <nav-bar class="home-nav">
+      <div slot="center">购物街</div>
+    </nav-bar>
+    <home-swiper :banners="banners" />
     <recommend-view :recommends="recommends"></recommend-view>
-    <home-feature/>
-    <tab-cortal class="tab-cortal" :title="['流行','新款','精选']"/>
-    <goods-list :goods="goods['pop'].list"/>
+    <home-feature />
+    <tab-cortal class="tab-cortal" :title="['流行','新款','精选']" @tabClick="tabClick" />
+    <goods-list :goods="showGoods" />
 
     <ul>
       <li>hhhhhhhhh</li>
@@ -49,85 +51,100 @@
 </template>
 
 <script>
-import HomeSwiper from './childComps/HomeSwiper'
-import RecommendView from './childComps/RecommendView'
-import HomeFeature from './childComps/HomeFeature'
+import HomeSwiper from "./childComps/HomeSwiper";
+import RecommendView from "./childComps/RecommendView";
+import HomeFeature from "./childComps/HomeFeature";
 
-import NavBar from 'components/common/navbar/NavBar'
-import TabCortal from 'components/content/tabcortal/TabCortal'
-import GoodsList from 'components/content/goods/GoodsList'
+import NavBar from "components/common/navbar/NavBar";
+import TabCortal from "components/content/tabcortal/TabCortal";
+import GoodsList from "components/content/goods/GoodsList";
 
-import {getHomeMultidata,getHomeGoods} from 'network/home.js'
+import { getHomeMultidata, getHomeGoods } from "network/home.js";
 // import Swiper from 'components/common/swiper/Swiper'
 // import SwiperItem from 'compoments/common/swiiper/SwiperItem'
 
- 
 export default {
-  name:"Home",
+  name: "Home",
   components: {
     HomeSwiper,
     RecommendView,
     HomeFeature,
     NavBar,
-    TabCortal 
+    TabCortal
   },
   data() {
     return {
       banners: [],
       recommends: [],
       goods: {
-        'pop': {page: 0, list: []},
-        'new': {page: 0, list: []},
-        'sell': {page: 0, list: []}
-      }
+        pop: { page: 0, list: [] },
+        new: { page: 0, list: [] },
+        sell: { page: 0, list: [] }
+      },
+      currentType: "pop"
+    };
+  },
+  computed: {
+    showGoods(){
+      return this.goods[currentType].list
     }
+    
   },
   created() {
     // 1.请求多个数据
-    this.getHomeMultidata()
+    this.getHomeMultidata();
 
     // 2.请求商品数据
-    this.getHomeGoods('pop')
-    this.getHomeGoods('new')
-    this.getHomeGoods('sell')
-   
+    this.getHomeGoods("pop");
+    this.getHomeGoods("new");
+    this.getHomeGoods("sell");
   },
   methods: {
+    // 网络请求的
     // 封装
-    getHomeMultidata(){
+    getHomeMultidata() {
       getHomeMultidata().then(res => {
-      // this.reslut = res;
-      // console.log(res);
-      this.banners = res.data.banner.list
-      // console.log(this.banners);
-      this.recommends = res.data.recommend.list
-    })
+        // this.reslut = res;
+        // console.log(res);
+        this.banners = res.data.banner.list;
+        // console.log(this.banners);
+        this.recommends = res.data.recommend.list;
+      });
     },
-      getHomeGoods(type){
-      const page = this.goods[type].page + 1
-      getHomeGoods(type,page).then(res => {
+    getHomeGoods(type) {
+      const page = this.goods[type].page + 1;
+      getHomeGoods(type, page).then(res => {
         console.log(res);
         // 老师接口已经改
-        this.goods[type].list.push(...res.data.list)
-        this.goods[type].page +=1
-     
-    })
+        this.goods[type].list.push(...res.data.list);
+        this.goods[type].page += 1;
+      });
+    },
+
+    // 事件监听的方法
+    TabCortal(index) {
+      switch (index) {
+        case 0:
+          this.currentType = "pop";
+          break;
+        case 1:
+          this.currentType = "new";
+          break;
+        case 2:
+          this.currentType = "sell";
+          break
+      }
     }
-    
-    
-    
-  },
-  
-}
+  }
+};
 </script>
 
 <style>
-
-#home{
+#home {
   padding-top: 44px;
 }
 
-.home-nav{
+.home-nav {
   background-color: var(--color-tint);
   color: white;
 
@@ -137,9 +154,10 @@ export default {
   top: 0;
   z-index: 9;
 }
-  
-  .tab-cortal{
-    position: sticky;
-    top: 44px;
-  }
+
+.tab-cortal {
+  position: sticky;
+  top: 44px;
+  z-index: 9;
+}
 </style>
