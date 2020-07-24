@@ -122,17 +122,29 @@ export default {
   },
   mounted() {
     // console.log(document.querySelector('.wapper'));
-    this.scroll = new BScroll(document.querySelector('.wrapper'),{})
+    this.scroll = new BScroll(document.querySelector('.wrapper'),{
+      probeType: 3,
+      pullUpLoad: true
+    })
+
+    this.scroll.on('scroll',(position) => {
+      console.log(position);
+    })
+
+    this.scroll.on('pullingUp',() => {
+      console.log("加载");
+    })
   },
 
   
 }
 </script>
 
-<style>
+<style scoped>
   .wrapper{
     height: 150px;
     background-color: red;
     /* overflow-y: scroll; */
+    overflow: hidden;
   }
 </style>

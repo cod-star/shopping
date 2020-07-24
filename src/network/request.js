@@ -3,7 +3,9 @@ export function request(config){
 
  // 1.创建axios的实例
   const instancel = axios.create({
-    baseURL: 'http://123.207.32.32:8000',
+    // 要接口可以加 coderwhy 老师
+    baseURL: 'url',
+    method: 'get',
     timeout: 5000
   })
   // 2.axios 的拦截器

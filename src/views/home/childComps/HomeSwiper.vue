@@ -4,7 +4,7 @@
         <li v-for="i in list" :key="i">-->
     <swiper-item v-for="item in banners">
       <a :href="item.link">
-        <img :src="item.image" alt="">
+        <img :src="item.image" alt=""  @load="imageLoad">
       </a>
     </swiper-item>
   </swiper>
@@ -22,12 +22,26 @@ export default {
         return []
       }
     }
-
+  },
+  data() {
+    return {
+      isLoad: false
+    }
   },
   components: {
     SwiperItem,
     Swiper
-  }
+  },
+  methods: {
+    imageLoad(){
+      if(!this.isLoad){
+        // 只要加载一张
+         this.$emit('swiper')
+         this.isLoad = true
+      }
+     
+    }
+  },
 };
 </script>
 <style>
