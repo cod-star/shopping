@@ -22,7 +22,6 @@
         </div> -->
       </div>
     </div>
-    <div v-if="commentInfo = 0"></div>
     <div v-else class="comment-info" style="color:red;">没有评论</div>
   </div>
 </template>

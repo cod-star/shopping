@@ -33,8 +33,9 @@ import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
 import BetterTop from "components/content/betterTop/BetterTop";
 
-import { getHomeMultidata, getHomeGoods } from "network/home.js";
-import {debounce} from 'common/util.js'
+import {getHomeMultidata, getHomeGoods} from "network/home.js";
+
+
 import {itemListenerMixin} from 'common/mixin.js'
 
 export default {
@@ -49,7 +50,7 @@ export default {
     Scroll,
     BetterTop
   },
-  mixins: [ itemListenerMixin],
+  mixins: [itemListenerMixin],
   data() {
     return {
       banners: [],
@@ -72,7 +73,7 @@ export default {
     }
   },
   destroyed() {
-    
+    this.$bus.off('itemImageLoad', this.homeImageLister)
   },
   activated() {
     this.$refs.scroll.scrollTo(0,this.saveY,0)
@@ -82,8 +83,6 @@ export default {
     // 1.获取滚动高度
     this.saveY = this.$refs.scroll.scroll.y
 
-    // 2.取消掉全局事件的监听
-    this.$bus.off('itemImageLoad',this.homeImageLister)
   },
   created() {
     // 1.请求多个数据
@@ -137,8 +136,12 @@ export default {
           this.currentType = "sell";
           break;
       }
+      // 让nav保持一致
+      if(this.$refs.tabControl1 !== undefined){
         this.$refs.tabControl1.currentIndex = index
         this.$refs.tabControl2.currentIndex = index
+      }
+       
     },
      
     //  返回顶部

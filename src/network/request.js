@@ -4,7 +4,7 @@ export function request(config){
  // 1.创建axios的实例
   const instancel = axios.create({
     // 要接口可以加 coderwhy 老师
-    baseURL: 'url',
+    baseURL: url,
     method: 'get',
     timeout: 5000
   })

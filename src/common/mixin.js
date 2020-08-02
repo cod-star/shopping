@@ -1,3 +1,5 @@
+import {debounce} from 'common/util.js'
+
 export const itemListenerMixin = {
   mounted() {
      // 防抖
